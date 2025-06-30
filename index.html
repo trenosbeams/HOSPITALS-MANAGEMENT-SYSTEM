@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERSADA SARI HUSNA Medical Center - Layanan Kesehatan Digital Terdepan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #dbeafe 0%, #ffffff 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .logo-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm border-b sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo_20250624_132942_0000-l0asqlLBUHRUAqVVEux0uwdvDLGb69.png" alt="PERSADA SARI HUSNA Medical Center" class="h-12 w-12 logo-animation">
+                <div>
+                    <span class="text-2xl font-bold text-gray-900">PERSADA SARI HUSNA</span>
+                    <div class="text-sm text-gray-600">Medical Center</div>
+                </div>
+            </div>
+            <div class="flex space-x-4">
+                <a href="login.html" class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+                    Masuk
+                </a>
+                <a href="register.html" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    Daftar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg py-20 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl font-bold text-gray-900 mb-6">Layanan Kesehatan Digital Terdepan</h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                Sistem pelayanan rumah sakit online yang terintegrasi dengan teknologi cloud. Daftar online, jadwal dokter,
+                rekam medis elektronik, dan pembayaran digital dalam satu platform.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="register.html" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg">
+                    Daftar Sebagai Pasien
+                </a>
+                <a href="login.html" class="px-8 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-lg">
+                    Portal Admin
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 px-4 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Fitur Unggulan Sistem Kami</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <i class="fas fa-users text-4xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Pendaftaran Online</h3>
+                    <p class="text-gray-600">Daftar sebagai pasien baru atau jadwalkan kunjungan dengan mudah</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <i class="fas fa-calendar-alt text-4xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Jadwal Dokter</h3>
+                    <p class="text-gray-600">Lihat jadwal dokter dan buat janji temu sesuai kebutuhan Anda</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <i class="fas fa-file-medical text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Rekam Medis Elektronik</h3>
+                    <p class="text-gray-600">Akses riwayat kesehatan dan rekam medis digital yang aman</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <i class="fas fa-credit-card text-4xl text-orange-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Pembayaran Digital</h3>
+                    <p class="text-gray-600">Bayar biaya layanan dengan transfer bank atau QRIS</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <i class="fas fa-shield-alt text-4xl text-red-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Keamanan Data</h3>
+                    <p class="text-gray-600">Data pasien dilindungi dengan enkripsi tingkat enterprise</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md card-hover">
+                    <i class="fas fa-heart text-4xl text-pink-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Layanan 24/7</h3>
+                    <p class="text-gray-600">Akses sistem kapan saja dengan dukungan cloud infrastructure</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 px-4 bg-blue-600 text-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">Mulai Gunakan Layanan Digital Kami</h2>
+            <p class="text-xl mb-8 opacity-90">
+                Bergabunglah dengan ribuan pasien yang telah merasakan kemudahan layanan kesehatan digital
+            </p>
+            <a href="register.html" class="px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors text-lg font-semibold">
+                Daftar Sekarang
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo_20250624_132942_0000-l0asqlLBUHRUAqVVEux0uwdvDLGb69.png" alt="PERSADA SARI HUSNA Medical Center" class="h-8 w-8">
+                        <span class="text-lg font-semibold">PERSADA SARI HUSNA Medical Center</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Sistem pelayanan rumah sakit online terpercaya dengan teknologi cloud terdepan.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Layanan</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Pendaftaran Online</li>
+                        <li>Jadwal Dokter</li>
+                        <li>Rekam Medis</li>
+                        <li>Pembayaran Digital</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Kontak</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-envelope mr-2"></i>info@persadasarihusna.co.id</li>
+                        <li><i class="fas fa-phone mr-2"></i>(021) 2345-6789</li>
+                        <li><i class="fab fa-whatsapp mr-2"></i>+62 813-4567-8901</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Alamat</h3>
+                    <p class="text-gray-400">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Jl. Kesehatan Persada No. 456<br>
+                        Jakarta Selatan 12160<br>
+                        Indonesia
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 PERSADA SARI HUSNA Medical Center. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

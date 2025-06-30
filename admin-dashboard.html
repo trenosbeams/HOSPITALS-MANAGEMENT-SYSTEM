@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - PERSADA SARI HUSNA Medical Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo_20250624_132942_0000-l0asqlLBUHRUAqVVEux0uwdvDLGb69.png" alt="PERSADA SARI HUSNA Medical Center" class="h-10 w-10">
+                <h1 class="text-2xl font-bold text-gray-900">Dashboard Admin</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-user text-gray-600"></i>
+                    <span id="userName" class="text-sm font-medium">Loading...</span>
+                </div>
+                <button onclick="logout()" class="px-3 py-1 border border-gray-300 text-gray-700 rounded hover:bg-gray-50 text-sm">
+                    <i class="fas fa-sign-out-alt mr-1"></i>
+                    Keluar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h2 id="welcomeMessage" class="text-3xl font-bold text-gray-900 mb-2">Selamat datang!</h2>
+            <p class="text-gray-600">Kelola operasional rumah sakit dan monitor aktivitas sistem</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total Pasien</p>
+                        <p class="text-2xl font-bold text-gray-900">1,234</p>
+                        <p class="text-xs text-green-600">+12% dari bulan lalu</p>
+                    </div>
+                    <i class="fas fa-users text-blue-600 text-2xl"></i>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Janji Hari Ini</p>
+                        <p class="text-2xl font-bold text-gray-900">45</p>
+                        <p class="text-xs text-green-600">+5% dari bulan lalu</p>
+                    </div>
+                    <i class="fas fa-calendar-alt text-green-600 text-2xl"></i>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Dokter Aktif</p>
+                        <p class="text-2xl font-bold text-gray-900">28</p>
+                        <p class="text-xs text-green-600">+2% dari bulan lalu</p>
+                    </div>
+                    <i class="fas fa-user-md text-purple-600 text-2xl"></i>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Pendapatan Bulan Ini</p>
+                        <p class="text-2xl font-bold text-gray-900">Rp 125M</p>
+                        <p class="text-xs text-green-600">+18% dari bulan lalu</p>
+                    </div>
+                    <i class="fas fa-chart-line text-orange-600 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Today's Appointments -->
+            <div class="bg-white rounded-lg shadow-md">
+                <div class="p-6 border-b">
+                    <h3 class="text-lg font-semibold flex items-center">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Jadwal Hari Ini
+                    </h3>
+                    <p class="text-gray-600 text-sm">Daftar janji konsultasi yang dijadwalkan hari ini</p>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 border rounded-lg">
+                            <div>
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <span class="font-semibold">09:00</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Konsultasi</span>
+                                </div>
+                                <p class="text-sm text-gray-600">John Doe • Dr. Sarah Johnson</p>
+                            </div>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Dikonfirmasi</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 border rounded-lg">
+                            <div>
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <span class="font-semibold">10:30</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Pemeriksaan</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Maria Santos • Dr. Michael Chen</p>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Berlangsung</span>
+                        </div>
+
+                        <div class="flex items-center justify-between p-4 border rounded-lg">
+                            <div>
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <span class="font-semibold">14:00</span>
+                                    <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">Follow-up</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Ahmad Wijaya • Dr. Lisa Wong</p>
+                            </div>
+                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full">Menunggu</span>
+                        </div>
+
+                        <button class="w-full py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50">
+                            Lihat Semua Jadwal
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="bg-white rounded-lg shadow-md">
+                <div class="p-6 border-b">
+                    <h3 class="text-lg font-semibold flex items-center">
+                        <i class="fas fa-activity mr-2"></i>
+                        Aktivitas Terbaru
+                    </h3>
+                    <p class="text-gray-600 text-sm">Monitor aktivitas sistem secara real-time</p>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3 p-3 border rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                            <div class="flex-1">
+                                <p class="text-sm">Janji baru dibuat oleh John Doe dengan Dr. Sarah</p>
+                                <p class="text-xs text-gray-500 mt-1">5 menit lalu</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 p-3 border rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-green-500 mt-2"></div>
+                            <div class="flex-1">
+                                <p class="text-sm">Pembayaran Rp 500,000 diterima dari Maria Santos</p>
+                                <p class="text-xs text-gray-500 mt-1">15 menit lalu</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 p-3 border rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-blue-500 mt-2"></div>
+                            <div class="flex-1">
+                                <p class="text-sm">Pasien baru terdaftar: Ahmad Wijaya</p>
+                                <p class="text-xs text-gray-500 mt-1">30 menit lalu</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3 p-3 border rounded-lg">
+                            <div class="w-2 h-2 rounded-full bg-red-500 mt-2"></div>
+                            <div class="flex-1">
+                                <p class="text-sm">Janji dibatalkan oleh Lisa Chen</p>
+                                <p class="text-xs text-gray-500 mt-1">1 jam lalu</p>
+                            </div>
+                        </div>
+
+                        <button class="w-full py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50">
+                            Lihat Semua Aktivitas
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Actions -->
+        <div class="grid md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover cursor-pointer">
+                <i class="fas fa-users text-3xl text-blue-600 mb-3"></i>
+                <h3 class="text-lg font-semibold mb-2">Manajemen Pasien</h3>
+                <p class="text-gray-600 text-sm">Kelola data pasien, registrasi, dan profil</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover cursor-pointer">
+                <i class="fas fa-user-md text-3xl text-green-600 mb-3"></i>
+                <h3 class="text-lg font-semibold mb-2">Manajemen Dokter</h3>
+                <p class="text-gray-600 text-sm">Kelola jadwal dokter dan spesialisasi</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover cursor-pointer">
+                <i class="fas fa-chart-bar text-3xl text-purple-600 mb-3"></i>
+                <h3 class="text-lg font-semibold mb-2">Laporan & Analitik</h3>
+                <p class="text-gray-600 text-sm">Lihat laporan keuangan dan statistik</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || user.role !== 'admin') {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('welcomeMessage').textContent = `Selamat datang, ${user.name}!`;
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

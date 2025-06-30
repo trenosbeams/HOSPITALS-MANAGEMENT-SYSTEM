@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Konsultasi - PERSADA SARI HUSNA Medical Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <a href="patient-dashboard.html" class="text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Kembali
+                </a>
+                <h1 class="text-2xl font-bold text-gray-900">Jadwal Konsultasi</h1>
+            </div>
+            <button onclick="openCreateModal()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                <i class="fas fa-plus mr-2"></i>
+                Buat Janji Baru
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Appointments List -->
+        <div class="space-y-6" id="appointmentsList">
+            <!-- Appointments will be loaded here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="bg-white rounded-lg shadow-md p-12 text-center hidden">
+            <i class="fas fa-calendar-alt text-6xl text-gray-400 mb-4"></i>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Belum Ada Janji Konsultasi</h3>
+            <p class="text-gray-600 mb-4">Buat janji konsultasi pertama Anda dengan dokter pilihan.</p>
+            <button onclick="openCreateModal()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                <i class="fas fa-plus mr-2"></i>
+                Buat Janji Baru
+            </button>
+        </div>
+    </div>
+
+    <!-- Create Appointment Modal -->
+    <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg max-w-md w-full p-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold">Buat Janji Konsultasi</h3>
+                <button onclick="closeCreateModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form id="createAppointmentForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Pilih Dokter</label>
+                    <select id="doctorSelect" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Pilih dokter</option>
+                        <option value="1">Dr. Sarah Johnson - Kardiologi (Rp 500,000)</option>
+                        <option value="2">Dr. Michael Chen - Dermatologi (Rp 400,000)</option>
+                        <option value="3">Dr. Lisa Wong - Gizi (Rp 350,000)</option>
+                        <option value="4">Dr. Ahmad Rizki - Penyakit Dalam (Rp 450,000)</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label>
+                    <input type="date" id="appointmentDate" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Waktu</label>
+                    <select id="appointmentTime" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Pilih waktu</option>
+                        <option value="09:00">09:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="11:00">11:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Catatan (Opsional)</label>
+                    <textarea id="appointmentNotes" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Jelaskan keluhan atau tujuan konsultasi"></textarea>
+                </div>
+                
+                <div class="flex justify-end space-x-2 pt-4">
+                    <button type="button" onclick="closeCreateModal()" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Buat Janji
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || user.role !== 'patient') {
+            window.location.href = 'login.html';
+        }
+
+        // Mock appointments data
+        let appointments = [
+            {
+                id: 1,
+                doctor: "Dr. Sarah Johnson",
+                specialty: "Kardiologi",
+                date: "2024-01-15",
+                time: "10:00",
+                status: "confirmed",
+                notes: "Pemeriksaan rutin jantung"
+            },
+            {
+                id: 2,
+                doctor: "Dr. Michael Chen",
+                specialty: "Dermatologi",
+                date: "2024-01-20",
+                time: "14:30",
+                status: "pending",
+                notes: "Konsultasi masalah kulit"
+            }
+        ];
+
+        // Doctors data
+        const doctors = {
+            "1": { name: "Dr. Sarah Johnson", specialty: "Kardiologi", fee: 500000 },
+            "2": { name: "Dr. Michael Chen", specialty: "Dermatologi", fee: 400000 },
+            "3": { name: "Dr. Lisa Wong", specialty: "Gizi", fee: 350000 },
+            "4": { name: "Dr. Ahmad Rizki", specialty: "Penyakit Dalam", fee: 450000 }
+        };
+
+        function loadAppointments() {
+            const appointmentsList = document.getElementById('appointmentsList');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (appointments.length === 0) {
+                appointmentsList.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            appointmentsList.innerHTML = appointments.map(appointment => `
+                <div class="bg-white rounded-lg shadow-md">
+                    <div class="p-6 border-b">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-lg font-semibold flex items-center">
+                                    <i class="fas fa-user-md mr-2"></i>
+                                    ${appointment.doctor}
+                                </h3>
+                                <p class="text-gray-600">${appointment.specialty}</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-sm ${getStatusClass(appointment.status)}">
+                                ${getStatusText(appointment.status)}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-calendar text-gray-500"></i>
+                                <span>${formatDate(appointment.date)}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-clock text-gray-500"></i>
+                                <span>${appointment.time}</span>
+                            </div>
+                        </div>
+                        ${appointment.notes ? `
+                            <div class="mb-4">
+                                <p class="text-sm text-gray-600">
+                                    <strong>Catatan:</strong> ${appointment.notes}
+                                </p>
+                            </div>
+                        ` : ''}
+                        <div class="flex justify-end space-x-2">
+                            ${appointment.status === 'pending' ? `
+                                <button onclick="cancelAppointment(${appointment.id})" class="px-3 py-1 border border-red-300 text-red-600 rounded hover:bg-red-50 text-sm">
+                                    Batalkan
+                                </button>
+                            ` : ''}
+                            ${appointment.status === 'confirmed' ? `
+                                <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">
+                                    Bayar Sekarang
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getStatusClass(status) {
+            switch(status) {
+                case 'confirmed': return 'bg-blue-100 text-blue-800';
+                case 'pending': return 'bg-yellow-100 text-yellow-800';
+                case 'completed': return 'bg-green-100 text-green-800';
+                case 'cancelled': return 'bg-red-100 text-red-800';
+                default: return 'bg-gray-100 text-gray-800';
+            }
+        }
+
+        function getStatusText(status) {
+            switch(status) {
+                case 'confirmed': return 'Dikonfirmasi';
+                case 'pending': return 'Menunggu';
+                case 'completed': return 'Selesai';
+                case 'cancelled': return 'Dibatalkan';
+                default: return status;
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function openCreateModal() {
+            document.getElementById('createModal').classList.remove('hidden');
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointmentDate').min = today;
+        }
+
+        function closeCreateModal() {
+            document.getElementById('createModal').classList.add('hidden');
+            document.getElementById('createAppointmentForm').reset();
+        }
+
+        function cancelAppointment(appointmentId) {
+            if (confirm('Apakah Anda yakin ingin membatalkan janji konsultasi ini?')) {
+                appointments = appointments.map(apt => 
+                    apt.id === appointmentId ? { ...apt, status: 'cancelled' } : apt
+                );
+                loadAppointments();
+                alert('Janji konsultasi berhasil dibatalkan.');
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('createAppointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const doctorId = document.getElementById('doctorSelect').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const notes = document.getElementById('appointmentNotes').value;
+            
+            if (doctorId && date && time) {
+                const doctor = doctors[doctorId];
+                const newAppointment = {
+                    id: appointments.length + 1,
+                    doctor: doctor.name,
+                    specialty: doctor.specialty,
+                    date: date,
+                    time: time,
+                    status: 'pending',
+                    notes: notes
+                };
+                
+                appointments.push(newAppointment);
+                loadAppointments();
+                closeCreateModal();
+                alert('Janji konsultasi berhasil dibuat! Menunggu konfirmasi dari dokter.');
+            }
+        });
+
+        // Load appointments on page load
+        loadAppointments();
+    </script>
+</body>
+</html>

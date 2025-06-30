@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pasien - PERSADA SARI HUSNA Medical Center</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blue%20Green%20White%20Simple%20Modern%20Medical%20Logo_20250624_132942_0000-l0asqlLBUHRUAqVVEux0uwdvDLGb69.png" alt="PERSADA SARI HUSNA Medical Center" class="h-10 w-10">
+                <h1 class="text-2xl font-bold text-gray-900">Dashboard Pasien</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 text-gray-600 hover:text-gray-900">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-user text-gray-600"></i>
+                    <span id="userName" class="text-sm font-medium">Loading...</span>
+                </div>
+                <button onclick="logout()" class="px-3 py-1 border border-gray-300 text-gray-700 rounded hover:bg-gray-50 text-sm">
+                    <i class="fas fa-sign-out-alt mr-1"></i>
+                    Keluar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h2 id="welcomeMessage" class="text-3xl font-bold text-gray-900 mb-2">Selamat datang!</h2>
+            <p class="text-gray-600">Kelola jadwal konsultasi dan akses rekam medis Anda dengan mudah</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover cursor-pointer" onclick="window.location.href='patient-appointments.html'">
+                <i class="fas fa-calendar-plus text-3xl text-blue-600 mb-3"></i>
+                <h3 class="text-lg font-semibold mb-2">Buat Janji</h3>
+                <p class="text-gray-600 text-sm">Jadwalkan konsultasi dengan dokter</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover cursor-pointer" onclick="window.location.href='patient-medical-records.html'">
+                <i class="fas fa-file-medical text-3xl text-green-600 mb-3"></i>
+                <h3 class="text-lg font-semibold mb-2">Rekam Medis</h3>
+                <p class="text-gray-600 text-sm">Lihat riwayat kesehatan Anda</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover cursor-pointer" onclick="window.location.href='patient-payments.html'">
+                <i class="fas fa-credit-card text-3xl text-purple-600 mb-3"></i>
+                <h3 class="text-lg font-semibold mb-2">Pembayaran</h3>
+                <p class="text-gray-600 text-sm">Bayar tagihan medis</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md card-hover cursor-pointer" onclick="window.location.href='patient-history.html'">
+                <i class="fas fa-history text-3xl text-orange-600 mb-3"></i>
+                <h3 class="text-lg font-semibold mb-2">Riwayat</h3>
+                <p class="text-gray-600 text-sm">Lihat riwayat kunjungan</p>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Upcoming Appointments -->
+            <div class="bg-white rounded-lg shadow-md">
+                <div class="p-6 border-b">
+                    <h3 class="text-lg font-semibold flex items-center">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Jadwal Konsultasi Mendatang
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 border rounded-lg">
+                            <div>
+                                <h4 class="font-semibold">Dr. Sarah Johnson</h4>
+                                <p class="text-sm text-gray-600">Kardiologi</p>
+                                <p class="text-sm text-gray-500">15 Jan 2024 • 10:00</p>
+                            </div>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Dikonfirmasi</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-4 border rounded-lg">
+                            <div>
+                                <h4 class="font-semibold">Dr. Michael Chen</h4>
+                                <p class="text-sm text-gray-600">Dermatologi</p>
+                                <p class="text-sm text-gray-500">20 Jan 2024 • 14:30</p>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Menunggu</span>
+                        </div>
+                        
+                        <button onclick="window.location.href='patient-appointments.html'" class="w-full py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50">
+                            Lihat Semua Jadwal
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Medical Records -->
+            <div class="bg-white rounded-lg shadow-md">
+                <div class="p-6 border-b">
+                    <h3 class="text-lg font-semibold flex items-center">
+                        <i class="fas fa-file-medical mr-2"></i>
+                        Rekam Medis Terbaru
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 border rounded-lg">
+                            <div>
+                                <h4 class="font-semibold">Pemeriksaan Rutin Jantung</h4>
+                                <p class="text-sm text-gray-600">Dr. Sarah Johnson</p>
+                                <p class="text-sm text-gray-500">10 Jan 2024</p>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Selesai</span>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-4 border rounded-lg">
+                            <div>
+                                <h4 class="font-semibold">Konsultasi Gizi</h4>
+                                <p class="text-sm text-gray-600">Dr. Lisa Wong</p>
+                                <p class="text-sm text-gray-500">5 Jan 2024</p>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Selesai</span>
+                        </div>
+                        
+                        <button onclick="window.location.href='patient-medical-records.html'" class="w-full py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50">
+                            Lihat Semua Rekam Medis
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Summary -->
+        <div class="bg-white rounded-lg shadow-md mt-8">
+            <div class="p-6 border-b">
+                <h3 class="text-lg font-semibold">Ringkasan Kesehatan</h3>
+                <p class="text-gray-600 text-sm">Informasi kesehatan terkini berdasarkan pemeriksaan terakhir</p>
+            </div>
+            <div class="p-6">
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <h3 class="text-2xl font-bold text-blue-600">120/80</h3>
+                        <p class="text-sm text-gray-600">Tekanan Darah</p>
+                        <p class="text-xs text-green-600">Normal</p>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <h3 class="text-2xl font-bold text-green-600">72</h3>
+                        <p class="text-sm text-gray-600">Detak Jantung</p>
+                        <p class="text-xs text-green-600">Normal</p>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <h3 class="text-2xl font-bold text-purple-600">65</h3>
+                        <p class="text-sm text-gray-600">Berat Badan (kg)</p>
+                        <p class="text-xs text-green-600">Ideal</p>
+                    </div>
+                    <div class="text-center p-4 bg-orange-50 rounded-lg">
+                        <h3 class="text-2xl font-bold text-orange-600">22.5</h3>
+                        <p class="text-sm text-gray-600">BMI</p>
+                        <p class="text-xs text-green-600">Normal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || user.role !== 'patient') {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('welcomeMessage').textContent = `Selamat datang, ${user.name}!`;
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
